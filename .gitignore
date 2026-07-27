@@ -1,0 +1,18 @@
+# ROM binary
+*.bin
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS and editor
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Dependencies and build outputs
+node_modules/
+dist/
+build/

@@ -1,0 +1,128 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Adventure - engine debug harness</title>
+<style>
+  body { background:#111; color:#ccc; font:13px/1.5 monospace; margin:0; padding:16px;
+         display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; }
+  canvas { background:#000; border:1px solid #333; image-rendering:pixelated; }
+  #panel { min-width:380px; max-width:460px; }
+  #hud { white-space:pre-wrap; background:#000; border:1px solid #333; padding:10px;
+         min-height:190px; color:#9d9; }
+  h1 { font-size:14px; color:#fff; margin:0 0 8px; letter-spacing:.06em; }
+  .k { color:#fff; }  .dim { color:#777; }
+  table { border-collapse:collapse; margin-top:10px; width:100%; }
+  td { padding:1px 8px 1px 0; vertical-align:top; }
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+
+<div id="panel">
+  <h1>ENGINE DEBUG HARNESS</h1>
+  <div id="hud">booting...</div>
+  <table>
+    <tr><td class="k">arrows</td><td>move</td></tr>
+    <tr><td class="k">space</td><td>pick up / drop</td></tr>
+    <tr><td class="k">1 2 3</td><td>start game 1 / 2 / 3</td></tr>
+    <tr><td class="k">R</td><td>reset current game</td></tr>
+    <tr><td class="k">, .</td><td>teleport to prev / next room</td></tr>
+    <tr><td class="k">G</td><td>toggle column grid</td></tr>
+    <tr><td class="k">H</td><td>toggle hitboxes</td></tr>
+    <tr><td class="k">K</td><td>toggle the darkness surround</td></tr>
+    <tr><td class="k">D</td><td>cycle bite difficulty (A/B)</td></tr>
+    <tr><td class="k">F</td><td>cycle sword-fear difficulty (A/B)</td></tr>
+    <tr><td class="k">W</td><td>cheat: teleport chalice to you</td></tr>
+    <tr><td class="k">P</td><td>toggle pacing: modern / 1978</td></tr>
+    <tr><td class="k">[ ]</td><td>dragon speed down / up</td></tr>
+    <tr><td class="k">- =</td><td>bite wind-up shorter / longer</td></tr>
+    <tr><td class="k">M</td><td>mute / unmute</td></tr>
+  </table>
+  <p class=”dim”>Stand-in silhouettes drawn as vector shapes, not the original
+  sprites. They exist so pose is readable: a dragon opens its jaws when winding
+  up to bite and lies on its back when slain, and the bat's wings beat. Press H
+  for hitboxes - white is the sprite bounds, red is the real collision box,
+  which is only the creature's feet.</p>
+</div>
+
+<!-- ?v= is a cache-buster: bump it after editing any of these. The preview
+     pane caches sub-resources hard, and a stale engine.js will silently make
+     your test results meaningless. -->
+<script src="src/core/gamedata.js?v=10"></script>
+<script src="src/core/engine.js?v=10"></script>
+<script src="src/debug/view2d.js?v=10"></script>
+<script src="src/debug/sound.js?v=10"></script>
+<script>
+(function () {
+  var eng = new ADV.Engine(ADV.DATA);
+  var view = new ADV.View2D(eng, document.getElementById('cv'),
+                            document.getElementById('hud'));
+  var snd = new ADV.Sound();
+  window.eng = eng; window.view = view; window.snd = snd;  // for console poking
+
+  // `fire` is the held state, `firePressed` is the edge. Auto-pickup is
+  // suppressed while fire is held, so you can drop a thing and walk off it.
+  var input = { up:false, down:false, left:false, right:false,
+                fire:false, firePressed:false };
+  var held = {};
+
+  var MAP = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right' };
+
+  addEventListener('keydown', function (ev) {
+    if (MAP[ev.key]) { input[MAP[ev.key]] = true; ev.preventDefault(); return; }
+    if (ev.code === 'Space') {
+      input.fire = true;
+      if (!held.space) { input.firePressed = true; held.space = true; }
+      ev.preventDefault(); return;
+    }
+    var k = ev.key.toLowerCase();
+    if (k === '1' || k === '2' || k === '3') eng.reset(parseInt(k, 10));
+    else if (k === 'r') eng.reset(eng.game);
+    else if (k === 'g') view.showGrid = !view.showGrid;
+    else if (k === 'h') view.showBoxes = !view.showBoxes;
+    else if (k === 'k') view.showDark = !view.showDark;
+    else if (k === 'd') eng.difficultyBite = eng.difficultyBite === 'A' ? 'B' : 'A';
+    else if (k === 'f') eng.difficultySword = eng.difficultySword === 'A' ? 'B' : 'A';
+    else if (k === ',') { eng.player.room = (eng.player.room + 30) % 31; }
+    else if (k === '.') { eng.player.room = (eng.player.room + 1) % 31; }
+    else if (k === 'w') {
+      var c = eng.ents['chalice'];
+      c.room = eng.player.room; c.x = eng.player.x + 8; c.y = eng.player.y;
+    }
+    else if (k === 'm') snd.enabled = !snd.enabled;
+    else if (k === 'p') eng.setPacing(eng.pacing === '1978' ? 'modern' : '1978');
+    else if (k === '[') eng.tuning.dragonSpeedScale =
+             Math.max(0.1, +(eng.tuning.dragonSpeedScale - 0.05).toFixed(2));
+    else if (k === ']') eng.tuning.dragonSpeedScale =
+             Math.min(2.0, +(eng.tuning.dragonSpeedScale + 0.05).toFixed(2));
+    else if (k === '-') eng.tuning.biteFrames =
+             Math.max(4, (eng.tuning.biteFrames || 12) - 5);
+    else if (k === '=') eng.tuning.biteFrames =
+             Math.min(300, (eng.tuning.biteFrames || 12) + 5);
+  });
+
+  addEventListener('keyup', function (ev) {
+    if (MAP[ev.key]) input[MAP[ev.key]] = false;
+    if (ev.code === 'Space') { held.space = false; input.fire = false; }
+  });
+
+  // Fixed 60 Hz logic tick, matching the original's frame-locked movement.
+  var acc = 0, last = performance.now();
+  (function loop(now) {
+    requestAnimationFrame(loop);
+    acc += Math.min(now - last, 100); last = now;
+    while (acc >= 1000 / 60) {
+      eng.step(input);
+      if (eng.events.length) snd.consume(eng.events);
+      input.firePressed = false;
+      acc -= 1000 / 60;
+    }
+    view.draw();
+  })(last);
+})();
+</script>
+</body>
+</html>
+

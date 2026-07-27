@@ -1,0 +1,290 @@
+﻿{
+    "behaviour":  {
+                      "playerStepsPerFrame":  3,
+                      "dragons":  [
+                                      {
+                                          "name":  "dragon-rhindle",
+                                          "zp":  "A4",
+                                          "listAddr":  "F7A7",
+                                          "stepsPerFrame":  3,
+                                          "rules":  [
+                                                        {
+                                                            "first":  "sword",
+                                                            "second":  "dragon-rhindle",
+                                                            "mode":  "flee",
+                                                            "target":  "sword"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-rhindle",
+                                                            "second":  "player",
+                                                            "mode":  "chase",
+                                                            "target":  "player"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-rhindle",
+                                                            "second":  "chalice",
+                                                            "mode":  "chase",
+                                                            "target":  "chalice"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-rhindle",
+                                                            "second":  "key-white",
+                                                            "mode":  "chase",
+                                                            "target":  "key-white"
+                                                        }
+                                                    ]
+                                      },
+                                      {
+                                          "name":  "dragon-yorgle",
+                                          "zp":  "A9",
+                                          "listAddr":  "F7C2",
+                                          "stepsPerFrame":  2,
+                                          "rules":  [
+                                                        {
+                                                            "first":  "sword",
+                                                            "second":  "dragon-yorgle",
+                                                            "mode":  "flee",
+                                                            "target":  "sword"
+                                                        },
+                                                        {
+                                                            "first":  "key-gold",
+                                                            "second":  "dragon-yorgle",
+                                                            "mode":  "flee",
+                                                            "target":  "key-gold"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-yorgle",
+                                                            "second":  "player",
+                                                            "mode":  "chase",
+                                                            "target":  "player"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-yorgle",
+                                                            "second":  "chalice",
+                                                            "mode":  "chase",
+                                                            "target":  "chalice"
+                                                        }
+                                                    ]
+                                      },
+                                      {
+                                          "name":  "dragon-grundle",
+                                          "zp":  "AE",
+                                          "listAddr":  "F7DD",
+                                          "stepsPerFrame":  2,
+                                          "rules":  [
+                                                        {
+                                                            "first":  "sword",
+                                                            "second":  "dragon-grundle",
+                                                            "mode":  "flee",
+                                                            "target":  "sword"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-grundle",
+                                                            "second":  "player",
+                                                            "mode":  "chase",
+                                                            "target":  "player"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-grundle",
+                                                            "second":  "chalice",
+                                                            "mode":  "chase",
+                                                            "target":  "chalice"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-grundle",
+                                                            "second":  "bridge",
+                                                            "mode":  "chase",
+                                                            "target":  "bridge"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-grundle",
+                                                            "second":  "magnet",
+                                                            "mode":  "chase",
+                                                            "target":  "magnet"
+                                                        },
+                                                        {
+                                                            "first":  "dragon-grundle",
+                                                            "second":  "key-black",
+                                                            "mode":  "chase",
+                                                            "target":  "key-black"
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                      "dragonBiteSeed":  {
+                                             "tableAddr":  "F89F",
+                                             "game1":  {
+                                                           "difficultyB":  "D0",
+                                                           "difficultyA":  "E8"
+                                                       },
+                                             "game2":  {
+                                                           "difficultyB":  "F0",
+                                                           "difficultyA":  "F6"
+                                                       },
+                                             "game3":  {
+                                                           "difficultyB":  "F0",
+                                                           "difficultyA":  "F6"
+                                                       }
+                                         },
+                      "bat":  {
+                                  "listAddr":  "F927",
+                                  "priority":  [
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "chalice",
+                                                       "mode":  "chase",
+                                                       "target":  "chalice"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "sword",
+                                                       "mode":  "chase",
+                                                       "target":  "sword"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "bridge",
+                                                       "mode":  "chase",
+                                                       "target":  "bridge"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "key-gold",
+                                                       "mode":  "chase",
+                                                       "target":  "key-gold"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "key-white",
+                                                       "mode":  "chase",
+                                                       "target":  "key-white"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "key-black",
+                                                       "mode":  "chase",
+                                                       "target":  "key-black"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "dragon-rhindle",
+                                                       "mode":  "chase",
+                                                       "target":  "dragon-rhindle"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "dragon-yorgle",
+                                                       "mode":  "chase",
+                                                       "target":  "dragon-yorgle"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "dragon-grundle",
+                                                       "mode":  "chase",
+                                                       "target":  "dragon-grundle"
+                                                   },
+                                                   {
+                                                       "first":  "bat",
+                                                       "second":  "magnet",
+                                                       "mode":  "chase",
+                                                       "target":  "magnet"
+                                                   }
+                                               ]
+                              },
+                      "magnet":  {
+                                     "listAddr":  "F9DA",
+                                     "attracts":  [
+                                                      {
+                                                          "first":  "key-gold",
+                                                          "second":  "magnet"
+                                                      },
+                                                      {
+                                                          "first":  "key-white",
+                                                          "second":  "magnet"
+                                                      },
+                                                      {
+                                                          "first":  "key-black",
+                                                          "second":  "magnet"
+                                                      },
+                                                      {
+                                                          "first":  "sword",
+                                                          "second":  "magnet"
+                                                      },
+                                                      {
+                                                          "first":  "bridge",
+                                                          "second":  "magnet"
+                                                      },
+                                                      {
+                                                          "first":  "chalice",
+                                                          "second":  "magnet"
+                                                      }
+                                                  ]
+                                 },
+                      "castles":  [
+                                      {
+                                          "castle":  "gold",
+                                          "exteriorRoom":  "11",
+                                          "interiorRoom":  "12",
+                                          "gate":  "portcullis-gold",
+                                          "key":  "key-gold"
+                                      },
+                                      {
+                                          "castle":  "white",
+                                          "exteriorRoom":  "0F",
+                                          "interiorRoom":  "1A",
+                                          "gate":  "portcullis-white",
+                                          "key":  "key-white"
+                                      },
+                                      {
+                                          "castle":  "black",
+                                          "exteriorRoom":  "10",
+                                          "interiorRoom":  "1B",
+                                          "gate":  "portcullis-black",
+                                          "key":  "key-black"
+                                      }
+                                  ],
+                      "variantExits":  [
+                                           {
+                                               "exitCode":  "80",
+                                               "game1":  "10",
+                                               "game2":  "0F",
+                                               "game3":  "0F"
+                                           },
+                                           {
+                                               "exitCode":  "83",
+                                               "game1":  "05",
+                                               "game2":  "11",
+                                               "game3":  "11"
+                                           },
+                                           {
+                                               "exitCode":  "86",
+                                               "game1":  "1D",
+                                               "game2":  "0A",
+                                               "game3":  "0A"
+                                           },
+                                           {
+                                               "exitCode":  "89",
+                                               "game1":  "1C",
+                                               "game2":  "16",
+                                               "game3":  "16"
+                                           },
+                                           {
+                                               "exitCode":  "8C",
+                                               "game1":  "1B",
+                                               "game2":  "0C",
+                                               "game3":  "0C"
+                                           },
+                                           {
+                                               "exitCode":  "8F",
+                                               "game1":  "03",
+                                               "game2":  "0C",
+                                               "game3":  "0C"
+                                           }
+                                       ]
+                  },
+    "source":  {
+                   "rom":  "Adventure (1978).bin",
+                   "md5":  "157BDDB7192754A45372BE196797F284",
+                   "generatedBy":  "tools/decode-rom.ps1"
+               }
+}

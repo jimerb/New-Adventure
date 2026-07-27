@@ -1,0 +1,471 @@
+﻿{
+    "layouts":  [
+                    {
+                        "game":  1,
+                        "tableAddr":  "F460",
+                        "placements":  [
+                                           {
+                                               "owner":  "dot",
+                                               "zp":  "A1",
+                                               "room":  "15",
+                                               "x":  "51",
+                                               "y":  "12"
+                                           },
+                                           {
+                                               "owner":  "dragon-rhindle",
+                                               "zp":  "A4",
+                                               "room":  "0E",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-yorgle",
+                                               "zp":  "A9",
+                                               "room":  "01",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-grundle",
+                                               "zp":  "AE",
+                                               "room":  "1D",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "magnet",
+                                               "zp":  "B3",
+                                               "room":  "1B",
+                                               "x":  "80",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "sword",
+                                               "zp":  "B6",
+                                               "room":  "12",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "chalice",
+                                               "zp":  "B9",
+                                               "room":  "1C",
+                                               "x":  "30",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bridge",
+                                               "zp":  "BC",
+                                               "room":  "04",
+                                               "x":  "29",
+                                               "y":  "37"
+                                           },
+                                           {
+                                               "owner":  "key-gold",
+                                               "zp":  "BF",
+                                               "room":  "11",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-white",
+                                               "zp":  "C2",
+                                               "room":  "0E",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-black",
+                                               "zp":  "C5",
+                                               "room":  "1D",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "portcullis-states",
+                                               "zp":  "C8",
+                                               "goldState":  "1C",
+                                               "whiteState":  "1C",
+                                               "blackState":  "1C"
+                                           },
+                                           {
+                                               "owner":  "bat",
+                                               "zp":  "CB",
+                                               "room":  "1A",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bat-internals",
+                                               "zp":  "CE",
+                                               "carrying":  "00",
+                                               "flapPhase":  "00",
+                                               "chaseTimer":  "78"
+                                           }
+                                       ]
+                    },
+                    {
+                        "game":  2,
+                        "tableAddr":  "F491",
+                        "placements":  [
+                                           {
+                                               "owner":  "dot",
+                                               "zp":  "A1",
+                                               "room":  "15",
+                                               "x":  "51",
+                                               "y":  "12"
+                                           },
+                                           {
+                                               "owner":  "dragon-rhindle",
+                                               "zp":  "A4",
+                                               "room":  "14",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-yorgle",
+                                               "zp":  "A9",
+                                               "room":  "19",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-grundle",
+                                               "zp":  "AE",
+                                               "room":  "04",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "magnet",
+                                               "zp":  "B3",
+                                               "room":  "0E",
+                                               "x":  "80",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "sword",
+                                               "zp":  "B6",
+                                               "room":  "11",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "chalice",
+                                               "zp":  "B9",
+                                               "room":  "14",
+                                               "x":  "30",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bridge",
+                                               "zp":  "BC",
+                                               "room":  "0B",
+                                               "x":  "40",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-gold",
+                                               "zp":  "BF",
+                                               "room":  "09",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-white",
+                                               "zp":  "C2",
+                                               "room":  "06",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-black",
+                                               "zp":  "C5",
+                                               "room":  "19",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "portcullis-states",
+                                               "zp":  "C8",
+                                               "goldState":  "1C",
+                                               "whiteState":  "1C",
+                                               "blackState":  "1C"
+                                           },
+                                           {
+                                               "owner":  "bat",
+                                               "zp":  "CB",
+                                               "room":  "02",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bat-internals",
+                                               "zp":  "CE",
+                                               "carrying":  "90",
+                                               "flapPhase":  "00",
+                                               "chaseTimer":  "78"
+                                           }
+                                       ]
+                    },
+                    {
+                        "game":  3,
+                        "tableAddr":  "F491",
+                        "placements":  [
+                                           {
+                                               "owner":  "dot",
+                                               "zp":  "A1",
+                                               "room":  "15",
+                                               "x":  "51",
+                                               "y":  "12"
+                                           },
+                                           {
+                                               "owner":  "dragon-rhindle",
+                                               "zp":  "A4",
+                                               "room":  "14",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-yorgle",
+                                               "zp":  "A9",
+                                               "room":  "19",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "dragon-grundle",
+                                               "zp":  "AE",
+                                               "room":  "04",
+                                               "x":  "50",
+                                               "y":  "20",
+                                               "state":  "00"
+                                           },
+                                           {
+                                               "owner":  "magnet",
+                                               "zp":  "B3",
+                                               "room":  "0E",
+                                               "x":  "80",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "sword",
+                                               "zp":  "B6",
+                                               "room":  "11",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "chalice",
+                                               "zp":  "B9",
+                                               "room":  "14",
+                                               "x":  "30",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bridge",
+                                               "zp":  "BC",
+                                               "room":  "0B",
+                                               "x":  "40",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-gold",
+                                               "zp":  "BF",
+                                               "room":  "09",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-white",
+                                               "zp":  "C2",
+                                               "room":  "06",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "key-black",
+                                               "zp":  "C5",
+                                               "room":  "19",
+                                               "x":  "20",
+                                               "y":  "40"
+                                           },
+                                           {
+                                               "owner":  "portcullis-states",
+                                               "zp":  "C8",
+                                               "goldState":  "1C",
+                                               "whiteState":  "1C",
+                                               "blackState":  "1C"
+                                           },
+                                           {
+                                               "owner":  "bat",
+                                               "zp":  "CB",
+                                               "room":  "02",
+                                               "x":  "20",
+                                               "y":  "20"
+                                           },
+                                           {
+                                               "owner":  "bat-internals",
+                                               "zp":  "CE",
+                                               "carrying":  "90",
+                                               "flapPhase":  "00",
+                                               "chaseTimer":  "78"
+                                           }
+                                       ]
+                    }
+                ],
+    "slots":  [
+                  {
+                      "span":  3,
+                      "zp":  161,
+                      "owner":  "dot"
+                  },
+                  {
+                      "span":  5,
+                      "zp":  164,
+                      "owner":  "dragon-rhindle"
+                  },
+                  {
+                      "span":  5,
+                      "zp":  169,
+                      "owner":  "dragon-yorgle"
+                  },
+                  {
+                      "span":  5,
+                      "zp":  174,
+                      "owner":  "dragon-grundle"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  179,
+                      "owner":  "magnet"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  182,
+                      "owner":  "sword"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  185,
+                      "owner":  "chalice"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  188,
+                      "owner":  "bridge"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  191,
+                      "owner":  "key-gold"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  194,
+                      "owner":  "key-white"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  197,
+                      "owner":  "key-black"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  200,
+                      "owner":  "portcullis-states"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  203,
+                      "owner":  "bat"
+                  },
+                  {
+                      "span":  3,
+                      "zp":  206,
+                      "owner":  "bat-internals"
+                  }
+              ],
+    "game3Randomised":  [
+                            {
+                                "owner":  "chalice",
+                                "zp":  "B9",
+                                "minRoom":  "13",
+                                "maxRoom":  "1A"
+                            },
+                            {
+                                "owner":  "dragon-rhindle",
+                                "zp":  "A4",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "dragon-yorgle",
+                                "zp":  "A9",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "dragon-grundle",
+                                "zp":  "AE",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "sword",
+                                "zp":  "B6",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "bridge",
+                                "zp":  "BC",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "key-gold",
+                                "zp":  "BF",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "key-white",
+                                "zp":  "C2",
+                                "minRoom":  "01",
+                                "maxRoom":  "16"
+                            },
+                            {
+                                "owner":  "key-black",
+                                "zp":  "C5",
+                                "minRoom":  "01",
+                                "maxRoom":  "12"
+                            },
+                            {
+                                "owner":  "bat",
+                                "zp":  "CB",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            },
+                            {
+                                "owner":  "magnet",
+                                "zp":  "B3",
+                                "minRoom":  "01",
+                                "maxRoom":  "1D"
+                            }
+                        ],
+    "zeroPageBase":  "A1",
+    "source":  {
+                   "rom":  "Adventure (1978).bin",
+                   "md5":  "157BDDB7192754A45372BE196797F284",
+                   "generatedBy":  "tools/decode-rom.ps1"
+               }
+}

@@ -1,0 +1,662 @@
+﻿{
+    "objects":  [
+                    {
+                        "code":  "00",
+                        "name":  "surround",
+                        "addr":  "FF44",
+                        "statePtr":  "FC01",
+                        "gfxTable":  "FC02",
+                        "color":  "28",
+                        "colorBW":  "0C",
+                        "nusiz":  "07",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FC05",
+                                           "height":  32
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "D9",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "09",
+                        "name":  "portcullis-gold",
+                        "addr":  "FF4D",
+                        "statePtr":  "00C8",
+                        "gfxTable":  "FAF1",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "04",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       },
+                                       {
+                                           "maxState":  "08",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "0C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "10",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "14",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "18",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "1C",
+                                           "gfxAddr":  "FB18",
+                                           "height":  16
+                                       },
+                                       {
+                                           "maxState":  "20",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "24",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "28",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "2C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "30",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       }
+                                   ],
+                        "positionKind":  "fixed",
+                        "fixedPosition":  {
+                                              "room":  "11",
+                                              "x":  "4D",
+                                              "y":  "31"
+                                          },
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "12",
+                        "name":  "portcullis-white",
+                        "addr":  "FF56",
+                        "statePtr":  "00C9",
+                        "gfxTable":  "FAF1",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "04",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       },
+                                       {
+                                           "maxState":  "08",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "0C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "10",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "14",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "18",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "1C",
+                                           "gfxAddr":  "FB18",
+                                           "height":  16
+                                       },
+                                       {
+                                           "maxState":  "20",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "24",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "28",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "2C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "30",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       }
+                                   ],
+                        "positionKind":  "fixed",
+                        "fixedPosition":  {
+                                              "room":  "0F",
+                                              "x":  "4D",
+                                              "y":  "31"
+                                          },
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "1B",
+                        "name":  "portcullis-black",
+                        "addr":  "FF5F",
+                        "statePtr":  "00CA",
+                        "gfxTable":  "FAF1",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "04",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       },
+                                       {
+                                           "maxState":  "08",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "0C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "10",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "14",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "18",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "1C",
+                                           "gfxAddr":  "FB18",
+                                           "height":  16
+                                       },
+                                       {
+                                           "maxState":  "20",
+                                           "gfxAddr":  "FB1A",
+                                           "height":  14
+                                       },
+                                       {
+                                           "maxState":  "24",
+                                           "gfxAddr":  "FB1C",
+                                           "height":  12
+                                       },
+                                       {
+                                           "maxState":  "28",
+                                           "gfxAddr":  "FB1E",
+                                           "height":  10
+                                       },
+                                       {
+                                           "maxState":  "2C",
+                                           "gfxAddr":  "FB20",
+                                           "height":  8
+                                       },
+                                       {
+                                           "maxState":  "30",
+                                           "gfxAddr":  "FB22",
+                                           "height":  6
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FB24",
+                                           "height":  4
+                                       }
+                                   ],
+                        "positionKind":  "fixed",
+                        "fixedPosition":  {
+                                              "room":  "10",
+                                              "x":  "4D",
+                                              "y":  "31"
+                                          },
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "24",
+                        "name":  "credits-text",
+                        "addr":  "FF68",
+                        "statePtr":  "FDEB",
+                        "gfxTable":  "FDEC",
+                        "color":  "CB",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD88",
+                                           "height":  32
+                                       }
+                                   ],
+                        "positionKind":  "fixed",
+                        "fixedPosition":  {
+                                              "room":  "1E",
+                                              "x":  "50",
+                                              "y":  "69"
+                                          },
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "2D",
+                        "name":  "game-number",
+                        "addr":  "FF71",
+                        "statePtr":  "00DD",
+                        "gfxTable":  "FE05",
+                        "color":  "C8",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "01",
+                                           "gfxAddr":  "FCF4",
+                                           "height":  7
+                                       },
+                                       {
+                                           "maxState":  "03",
+                                           "gfxAddr":  "FD04",
+                                           "height":  7
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD0C",
+                                           "height":  7
+                                       }
+                                   ],
+                        "positionKind":  "fixed",
+                        "fixedPosition":  {
+                                              "room":  "00",
+                                              "x":  "50",
+                                              "y":  "40"
+                                          },
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "36",
+                        "name":  "dragon-rhindle",
+                        "addr":  "FF7A",
+                        "statePtr":  "00A8",
+                        "gfxTable":  "FD2E",
+                        "color":  "36",
+                        "colorBW":  "0E",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "00",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "01",
+                                           "gfxAddr":  "FD66",
+                                           "height":  17
+                                       },
+                                       {
+                                           "maxState":  "02",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD4F",
+                                           "height":  22
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "A4",
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "3F",
+                        "name":  "dragon-yorgle",
+                        "addr":  "FF83",
+                        "statePtr":  "00AD",
+                        "gfxTable":  "FD2E",
+                        "color":  "1A",
+                        "colorBW":  "06",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "00",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "01",
+                                           "gfxAddr":  "FD66",
+                                           "height":  17
+                                       },
+                                       {
+                                           "maxState":  "02",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD4F",
+                                           "height":  22
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "A9",
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "48",
+                        "name":  "dragon-grundle",
+                        "addr":  "FF8C",
+                        "statePtr":  "00B2",
+                        "gfxTable":  "FD2E",
+                        "color":  "C8",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "00",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "01",
+                                           "gfxAddr":  "FD66",
+                                           "height":  17
+                                       },
+                                       {
+                                           "maxState":  "02",
+                                           "gfxAddr":  "FD3A",
+                                           "height":  20
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD4F",
+                                           "height":  22
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "AE",
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "51",
+                        "name":  "sword",
+                        "addr":  "FF95",
+                        "statePtr":  "FD78",
+                        "gfxTable":  "FD79",
+                        "color":  "1A",
+                        "colorBW":  "06",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD7C",
+                                           "height":  5
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "B6",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "5A",
+                        "name":  "bridge",
+                        "addr":  "FF9E",
+                        "statePtr":  "FCD7",
+                        "gfxTable":  "FCD8",
+                        "color":  "66",
+                        "colorBW":  "02",
+                        "nusiz":  "07",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FCDB",
+                                           "height":  24
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "BC",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "63",
+                        "name":  "key-gold",
+                        "addr":  "FFA7",
+                        "statePtr":  "FCFC",
+                        "gfxTable":  "FCFD",
+                        "color":  "1A",
+                        "colorBW":  "06",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD00",
+                                           "height":  3
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "BF",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "6C",
+                        "name":  "key-white",
+                        "addr":  "FFB0",
+                        "statePtr":  "FCFC",
+                        "gfxTable":  "FCFD",
+                        "color":  "0E",
+                        "colorBW":  "0E",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD00",
+                                           "height":  3
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "C2",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "75",
+                        "name":  "key-black",
+                        "addr":  "FFB9",
+                        "statePtr":  "FCFC",
+                        "gfxTable":  "FCFD",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD00",
+                                           "height":  3
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "C5",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "7E",
+                        "name":  "bat",
+                        "addr":  "FFC2",
+                        "statePtr":  "00CF",
+                        "gfxTable":  "FD14",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "03",
+                                           "gfxAddr":  "FD1A",
+                                           "height":  7
+                                       },
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD22",
+                                           "height":  11
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "CB",
+                        "stateKind":  "ram"
+                    },
+                    {
+                        "code":  "87",
+                        "name":  "dot",
+                        "addr":  "FFCB",
+                        "statePtr":  "FD82",
+                        "gfxTable":  "FD83",
+                        "color":  "08",
+                        "colorBW":  "08",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FD86",
+                                           "height":  1
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "A1",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "90",
+                        "name":  "chalice",
+                        "addr":  "FFD4",
+                        "statePtr":  "FDEF",
+                        "gfxTable":  "FDF0",
+                        "color":  "CB",
+                        "colorBW":  "06",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FDF3",
+                                           "height":  9
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "B9",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "99",
+                        "name":  "magnet",
+                        "addr":  "FFDD",
+                        "statePtr":  "FE0E",
+                        "gfxTable":  "FE0F",
+                        "color":  "00",
+                        "colorBW":  "06",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FE12",
+                                           "height":  8
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "B3",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    },
+                    {
+                        "code":  "A2",
+                        "name":  "null",
+                        "addr":  "FFE6",
+                        "statePtr":  "FDFD",
+                        "gfxTable":  "FDFE",
+                        "color":  "00",
+                        "colorBW":  "00",
+                        "nusiz":  "00",
+                        "frames":  [
+                                       {
+                                           "maxState":  "FF",
+                                           "gfxAddr":  "FE01",
+                                           "height":  0
+                                       }
+                                   ],
+                        "positionKind":  "ram",
+                        "zpPosition":  "BC",
+                        "stateKind":  "constant",
+                        "constState":  "00"
+                    }
+                ],
+    "stride":  9,
+    "source":  {
+                   "rom":  "Adventure (1978).bin",
+                   "md5":  "157BDDB7192754A45372BE196797F284",
+                   "generatedBy":  "tools/decode-rom.ps1"
+               },
+    "objectTableBase":  "FF44"
+}
