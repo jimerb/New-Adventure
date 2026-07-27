@@ -193,9 +193,58 @@ empirically in build step 3.
 **Do not use the 4-unit cell as the voxel size.** Cells are 4 wide × ~14 tall;
 building on the cell makes every corridor a slot. Use the ~16-unit corridor.
 
-**Camera: open.** First-person makes the mazes brutal — they were designed to
-confuse you while *fully visible from above*. Leaning toward raised
-third-person. Settled by looking, in step 3.
+### Step 3 findings — measured in `spike-camera.html`
+
+Seven things the spike settled that could not be settled on paper. The first is
+the important one.
+
+**1. Tick rate is the speed knob, and it needs no engine change.** The engine
+moves whole units per tick — 3 for the player, 2 for a dragon. Slowing the
+player by moving *fewer units per tick* is impossible without sub-unit
+positions, i.e. floats through the whole collision core. Ticking **less often**
+and interpolating between ticks gives the same result, touches nothing, and
+preserves every relative speed in the game exactly. One number.
+
+**2. The original's speed is road speed.** At any scale where a room reads as a
+real space, 3 units/frame at 60 Hz is 20–45 m/s. The 1978 preset shows this
+honestly: it is faithful, and nothing at that rate can read as a person.
+
+**3. The 0.25× dragon setting was tuned against 1978 player speed.** It makes
+dragons **6× slower than you** — you walk away from them. The original ratio is
+**1.5×**, and Rhindle's is **1.0×**: he exactly matches you, which is why he is
+frightening. *Dragon speed must be specified as a ratio to player speed, not an
+absolute multiplier* — otherwise re-tuning the player silently guts the threat.
+Recommended ≈ 2.5× (outrunnable, still a threat).
+
+**4. The 40 × 7 grid cannot give both square cells and a proportioned room.**
+Squaring the cells flattens a room to a 40 × 7 strip. Deep cells are the right
+answer: at `zStretch 1.0` a wall is 1 m wide × 4 m deep, which reads as a thick
+castle wall and looks correct. Confirmed by looking at both.
+
+**5. Sprite height is not real height.** A 20-unit dragon sprite scales to a 5 m
+dragon. Figures need an explicit height table, decoupled from sprite metrics.
+
+**6. Render narrower than you collide.** The player's collision box is 4 × 8
+units — about 1 m × 2 m, far wider than a person. Drawing the figure at ~0.55×
+its collision footprint keeps the original's forgiving feel while looking human.
+Toggle *Collision boxes* in the spike to see the gap.
+
+**7. Arrow keys are world-absolute, so the camera must not rotate.** A follow
+camera that turns with movement breaks the mapping between key and direction.
+North-up is the default; the rotating variant is a toggle so the problem is
+demonstrable rather than theoretical.
+
+### Camera: recommendation
+
+**Raised third-person follow, ~50° down, ~16 m back, north-up.** First person
+is genuinely unplayable here and the spike proves it — a maze room reduces to a
+featureless corridor with no information. Overhead is faithful and the right
+home for the Easter Egg Version. Fixed-tilt-per-room frames beautifully but
+gives away the whole maze, which removes the point of a maze.
+
+**Recommended numbers, pending playtest:** 1 m per cell (40 × 24 m room),
+12 Hz tick → **9 m/s, 4.4 s to cross a room**, dragons at ~2.5× ratio, wall
+height 2.5 m. Not yet a decision — see §10.
 
 ---
 
@@ -340,8 +389,9 @@ Steps 2–4 carry the risk. After that it's mostly content.
 
 | # | Question | Needed by |
 |---|---|---|
-| 1 | Camera: first-person vs raised third-person | step 3 |
-| 2 | Final tile scale and movement speed | step 3 |
+| 1 | ~~Camera~~ — spike recommends raised third-person, 50°, north-up. **Awaiting sign-off** | step 3 |
+| 2 | ~~Tile scale and speed~~ — spike recommends 1 m/cell, 12 Hz tick, 9 m/s. **Awaiting sign-off** | step 3 |
+| 2b | Dragon ratio: 1.5× (faithful, harsh) vs ~2.5× (outrunnable) | step 4 |
 | 3 | Level 4 room count (~31 vs ~50–60) | step 7 |
 | 4 | Working title | before art |
 | 5 | Does tunneling trivialize the mazes? | step 6 |
@@ -373,3 +423,6 @@ Steps 2–4 carry the risk. After that it's mostly content.
 | 2026-07-27 | Engine emits named events; presentation decides what they look/sound like | Keeps the core renderer-agnostic. Audio and the win flash consume events and know nothing about game rules |
 | 2026-07-27 | Readability floor on object colours, at the view layer only | The black key is colour `00` on a `08` floor and is genuinely invisible in the black maze. `data/` stays faithful; presentation compensates. Whether the real game keeps that cruelty is a step 5 call |
 | 2026-07-27 | **The 2D view ships as a hidden Easter Egg Version** rather than being thrown away | Two renderers on one core *enforce* the renderer-agnostic boundary instead of merely asking for it — the cheapest possible insurance for a later VR port. Nostalgia is the bonus, not the reason |
+| 2026-07-27 | **Wall-clock speed is set by tick rate, not by units per tick** | Keeps the engine integer and untouched, preserves every relative speed exactly, and makes pacing a single number. Sub-unit movement would have meant floats through the whole collision core |
+| 2026-07-27 | **Dragon speed is specified as a ratio to player speed** | An absolute multiplier silently guts the threat whenever the player is re-tuned — which is exactly what the 0.25× setting did. Original ratio is 1.5×; Rhindle is 1.0× |
+| 2026-07-27 | Colour decoding moved to `src/core/palette.js` | The second renderer arrived and immediately needed it. First real proof the renderer-agnostic boundary does work |

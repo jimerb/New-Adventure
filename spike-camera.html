@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Adventure - step 3 camera &amp; scale spike</title>
+<style>
+  body { background:#0d0f12; color:#c8ccd2; font:13px/1.5 monospace; margin:0;
+         padding:14px; display:flex; gap:14px; align-items:flex-start;
+         flex-wrap:wrap; }
+  canvas { background:#000; border:1px solid #2a2f36; }
+  #panel { width:340px; }
+  h1 { font-size:13px; color:#fff; margin:0 0 4px; letter-spacing:.08em; }
+  h2 { font-size:11px; color:#7f8792; margin:14px 0 6px; letter-spacing:.14em;
+       text-transform:uppercase; font-weight:normal;
+       border-bottom:1px solid #23272e; padding-bottom:3px; }
+  .row { display:flex; align-items:center; gap:8px; margin:3px 0; }
+  .row label { width:104px; color:#8b929c; flex:none; }
+  .row input[type=range] { flex:1; min-width:0; }
+  .row .v { width:56px; text-align:right; color:#e6e9ed; flex:none; }
+  button { background:#1a1e24; color:#c8ccd2; border:1px solid #333a43;
+           padding:4px 9px; font:12px monospace; cursor:pointer; border-radius:3px; }
+  button:hover { background:#232830; }
+  button.on { background:#2d5a8c; border-color:#4a86c8; color:#fff; }
+  .btns { display:flex; gap:5px; flex-wrap:wrap; margin:4px 0; }
+  .note { color:#6d747e; margin:9px 0 0; }
+  .note b { color:#a8b0ba; font-weight:normal; }
+  table.keys { border-collapse:collapse; margin-top:6px; }
+  table.keys td { padding:0 8px 1px 0; color:#6d747e; }
+  table.keys td:first-child { color:#c8ccd2; }
+</style>
+</head>
+<body>
+
+<canvas id="cv" width="880" height="560"></canvas>
+
+<div id="panel">
+  <h1>STEP 3 &mdash; CAMERA &amp; SCALE</h1>
+  <div class="note">Answer three things: how big a room is, how fast you move,
+    and which camera keeps a maze fair when you can't see over it.</div>
+
+  <h2>Preset</h2>
+  <div class="btns" id="presets"></div>
+
+  <h2>Camera</h2>
+  <div class="btns" id="cams"></div>
+
+  <h2>Scale &amp; speed</h2>
+  <div id="sliders"></div>
+
+  <h2>View</h2>
+  <div class="btns" id="toggles"></div>
+
+  <table class="keys">
+    <tr><td>arrows</td><td>move</td></tr>
+    <tr><td>space</td><td>pick up / drop</td></tr>
+    <tr><td>, .</td><td>previous / next room</td></tr>
+    <tr><td>1 2 3 4</td><td>camera</td></tr>
+    <tr><td>R</td><td>reset game 3</td></tr>
+  </table>
+
+  <div class="note" id="verdict"></div>
+</div>
+
+<script src="src/core/palette.js?v=1"></script>
+<script src="src/core/gamedata.js?v=10"></script>
+<script src="src/core/engine.js?v=10"></script>
+<script src="src/spike/view3d.js?v=2"></script>
+<script>
+(function () {
+  'use strict';
+
+  var eng  = new ADV.Engine(ADV.DATA);
+  var view = new ADV.View3D(eng, document.getElementById('cv'));
+  window.eng = eng; window.view = view;
+
+  // TICK RATE IS THE SPEED KNOB.
+  //
+  // The engine moves in whole units per tick -- 3 for the player, 2 for a
+  // dragon -- and at 60 Hz that is the 1978 game: a room is one second wide.
+  // Making the player slower by moving fewer units per tick would need
+  // sub-unit positions, i.e. floats through the whole collision core.
+  //
+  // Ticking *less often* and interpolating between ticks gets the same result
+  // without touching the engine at all, and it preserves every relative speed
+  // in the game exactly. One number, no rewrite.
+  var tickHz = 12;
+
+  var input = { up:false, down:false, left:false, right:false,
+                fire:false, firePressed:false };
+  var held = {};
+
+  // ------------------------------------------------------- interpolation
+  function snap() {
+    var s = { player: { room:eng.player.room, x:eng.player.x, y:eng.player.y },
+              ents: {} };
+    for (var n in eng.ents) {
+      var e = eng.ents[n];
+      s.ents[n] = { room:e.room, x:e.x, y:e.y, state:e.state };
+    }
+    return s;
+  }
+
+  // A room change is a teleport, not a movement -- lerping across it would slide
+  // the whole world sideways. Snap instead whenever the room differs.
+  function lerp(a, b, t) {
+    var o = { player: mix(a.player, b.player, t), ents: {} };
+    for (var n in b.ents) {
+      o.ents[n] = a.ents[n] ? mix(a.ents[n], b.ents[n], t) : b.ents[n];
+      o.ents[n].state = b.ents[n].state;
+    }
+    return o;
+  }
+  function mix(a, b, t) {
+    if (a.room !== b.room) return { room:b.room, x:b.x, y:b.y, state:b.state };
+    return { room:b.room, x:a.x + (b.x - a.x) * t, y:a.y + (b.y - a.y) * t,
+             state:b.state };
+  }
+
+  var prev = snap(), cur = snap();
+
+  // ------------------------------------------------------------- controls
+  var SLIDERS = [
+    { k:'mPerCell', label:'metres/cell', min:0.25, max:2.5,  step:0.05, u:' m' },
+    { k:'zStretch', label:'depth scale', min:0.25, max:1.5,  step:0.05, u:'×' },
+    { k:'wallH',    label:'wall height', min:0.5,  max:8,    step:0.1,  u:' m' },
+    { k:'fov',      label:'field of view', min:35, max:100,  step:1,    u:'°' },
+    { k:'pitch',    label:'look-down',   min:10,   max:89,   step:1,    u:'°' },
+    { k:'dist',     label:'follow dist', min:4,    max:60,   step:0.5,  u:' m' },
+    { k:'tick',     label:'tick rate',   min:4,    max:60,   step:1,    u:' Hz' },
+    { k:'drag',     label:'dragon speed',min:0.1,  max:1.5,  step:0.05, u:'×' }
+  ];
+
+  var box = document.getElementById('sliders'), ui = {};
+  SLIDERS.forEach(function (s) {
+    var row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = '<label>' + s.label + '</label>' +
+      '<input type="range" min="' + s.min + '" max="' + s.max +
+      '" step="' + s.step + '"><span class="v"></span>';
+    box.appendChild(row);
+    var inp = row.querySelector('input'), out = row.querySelector('.v');
+    ui[s.k] = { inp:inp, out:out, spec:s };
+    inp.addEventListener('input', function () { apply(s.k, parseFloat(inp.value)); });
+  });
+
+  function apply(k, v) {
+    if (k === 'tick') tickHz = v;
+    else if (k === 'drag') eng.tuning.dragonSpeedScale = v;
+    else view.opt[k] = v;
+    var c = ui[k];
+    c.inp.value = v;
+    c.out.textContent = (c.spec.step < 1 ? v.toFixed(2) : v) + c.spec.u;
+    refreshVerdict();
+  }
+
+  var CAMS = [['overhead','Overhead'], ['tilt','Fixed tilt'],
+              ['follow','Follow'], ['fp','First person']];
+  var camBtns = {};
+  CAMS.forEach(function (c) {
+    var b = document.createElement('button');
+    b.textContent = c[1];
+    b.onclick = function () { setCam(c[0]); };
+    document.getElementById('cams').appendChild(b);
+    camBtns[c[0]] = b;
+  });
+  function setCam(id) {
+    view.opt.cam = id;
+    for (var k in camBtns) camBtns[k].className = (k === id ? 'on' : '');
+    refreshVerdict();
+  }
+
+  // Presets are arguments, not defaults. Each one is a coherent position on the
+  // scale-versus-pacing trade, so they can be compared in a few seconds each.
+  var PRESETS = {
+    'Faithful 1978': { mPerCell:0.50, zStretch:1.00, wallH:1.6, fov:60, pitch:89,
+                       dist:16, tick:60, drag:1.00, cam:'overhead' },
+    'Recommended':   { mPerCell:1.00, zStretch:1.00, wallH:2.5, fov:60, pitch:50,
+                       dist:16, tick:12, drag:0.60, cam:'follow' },
+    'Grand':         { mPerCell:1.75, zStretch:1.00, wallH:4.0, fov:65, pitch:38,
+                       dist:26, tick:8,  drag:0.55, cam:'follow' }
+  };
+  Object.keys(PRESETS).forEach(function (name) {
+    var b = document.createElement('button');
+    b.textContent = name;
+    b.onclick = function () {
+      var p = PRESETS[name];
+      for (var k in p) if (k !== 'cam') apply(k, p[k]);
+      setCam(p.cam);
+    };
+    document.getElementById('presets').appendChild(b);
+  });
+
+  var TOGGLES = [
+    ['fog', 'Fog'], ['showFoot', 'Collision boxes'], ['turnWithMotion', 'Camera turns']
+  ];
+  TOGGLES.forEach(function (t) {
+    var b = document.createElement('button');
+    b.textContent = t[1];
+    b.onclick = function () {
+      view.opt[t[0]] = !view.opt[t[0]];
+      b.className = view.opt[t[0]] ? 'on' : '';
+      refreshVerdict();
+    };
+    b.className = view.opt[t[0]] ? 'on' : '';
+    document.getElementById('toggles').appendChild(b);
+  });
+
+  // ------------------------------------------------------------- readout
+  function refreshVerdict() {
+    var m = view.metrics(tickHz);
+    var bits = [];
+    bits.push('<b>' + m.roomW.toFixed(0) + ' × ' + m.roomD.toFixed(0) +
+              ' m</b> room, crossed in <b>' + m.crossX.toFixed(1) + ' s</b>.');
+    if (m.playerSpeed > 12) {
+      bits.push('You are moving at <b>' + m.playerSpeed.toFixed(0) +
+                ' m/s</b> &mdash; road speed. Faithful, but nothing at this ' +
+                'scale can read as a person walking.');
+    } else if (m.playerSpeed < 3.5) {
+      bits.push('At <b>' + m.playerSpeed.toFixed(1) + ' m/s</b> you are slower ' +
+                'than a jog, and 31 rooms of backtracking will feel like it.');
+    } else {
+      bits.push('<b>' + m.playerSpeed.toFixed(1) + ' m/s</b> is a believable run.');
+    }
+    if (m.ratio > 3) {
+      bits.push('Dragons are <b>' + m.ratio.toFixed(1) + '×</b> slower than ' +
+                'you &mdash; you can simply walk away from them. The original ' +
+                'ratio is 1.5×, and Rhindle’s is 1.0×.');
+    } else if (m.ratio < 1.2) {
+      bits.push('Dragons nearly match you (<b>' + m.ratio.toFixed(1) +
+                '×</b>). Authentic, and close to unescapable in the open.');
+    } else {
+      bits.push('Dragons at <b>' + m.ratio.toFixed(1) + '×</b> your speed: ' +
+                'outrunnable, but they stay a threat.');
+    }
+    // The 40x7 grid is wildly anisotropic and you cannot have both square cells
+    // and a well-proportioned room -- squaring the cells gives a 40x7 strip.
+    // Deep cells turn out to look right (thick castle walls), so this is a
+    // note, not a warning.
+    var cellD = 16 * view.muZ;
+    if (view.opt.zStretch < 0.75) {
+      bits.push('Depth scale <b>' + view.opt.zStretch.toFixed(2) + '×</b> squares ' +
+                'the cells up but flattens the room to a strip &mdash; the 40×7 ' +
+                'grid cannot give you both.');
+    }
+    if (view.opt.cam === 'fp' || (view.opt.cam === 'follow' && view.opt.pitch < 35)) {
+      bits.push('At this angle the maze is <b>hidden</b>. Arrow keys still move ' +
+                'in world directions &mdash; check whether that still makes sense.');
+    }
+    document.getElementById('verdict').innerHTML = bits.join(' ');
+  }
+
+  addEventListener('keydown', function (ev) {
+    var MAP = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right' };
+    if (MAP[ev.key]) { input[MAP[ev.key]] = true; ev.preventDefault(); return; }
+    if (ev.code === 'Space') {
+      input.fire = true;
+      if (!held.space) { input.firePressed = true; held.space = true; }
+      ev.preventDefault(); return;
+    }
+    var k = ev.key.toLowerCase();
+    if (k === 'r') { eng.reset(3); prev = cur = snap(); }
+    else if (k === ',') { eng.player.room = (eng.player.room + 30) % 31; prev = cur = snap(); }
+    else if (k === '.') { eng.player.room = (eng.player.room + 1) % 31; prev = cur = snap(); }
+    else if (k >= '1' && k <= '4') setCam(CAMS[+k - 1][0]);
+  });
+  addEventListener('keyup', function (ev) {
+    var MAP = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right' };
+    if (MAP[ev.key]) input[MAP[ev.key]] = false;
+    if (ev.code === 'Space') { held.space = false; input.fire = false; }
+  });
+
+  // ------------------------------------------------------------- main loop
+  var acc = 0, last = performance.now();
+  (function loop(now) {
+    requestAnimationFrame(loop);
+    var period = 1000 / tickHz;
+    acc += Math.min(now - last, 250);
+    last = now;
+
+    while (acc >= period) {
+      prev = cur;
+      eng.step(input);
+      input.firePressed = false;
+      cur = snap();
+      acc -= period;
+    }
+
+    view.updateHeading((input.right ? 1 : 0) - (input.left ? 1 : 0),
+                       (input.up ? 1 : 0) - (input.down ? 1 : 0));
+    view.draw(lerp(prev, cur, acc / period), tickHz);
+  })(last);
+
+  // Boot on the recommendation so there is something considered on screen
+  // rather than a pile of defaults.
+  var p = PRESETS['Recommended'];
+  for (var k in p) if (k !== 'cam') apply(k, p[k]);
+  setCam(p.cam);
+})();
+</script>
+</body>
+</html>
